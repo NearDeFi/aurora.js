@@ -111,14 +111,14 @@ export class Transaction {
       return Some(
         new Transaction(
           transaction.nonce,
-          BigInt(transaction.gasPrice.toString()),
+          BigInt(transaction?.gasPrice?.toString() || 0),
           BigInt(transaction.gasLimit.toString()), // FIXME: #16, #17
           Address.parse(transaction.to).ok(),
           BigInt(transaction.value.toString()),
           hexToBytes(transaction.data),
-          BigInt(transaction.v),
-          BigInt(transaction.r),
-          BigInt(transaction.s),
+          BigInt(transaction.v || 0),
+          BigInt(transaction.r || 0),
+          BigInt(transaction.s || 0),
           transaction.from
             ? Address.parse(transaction.from).unwrap()
             : undefined,
